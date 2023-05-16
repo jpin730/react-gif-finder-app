@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 export const AddCategory = ({ onNewCategory }) => {
+  const inputMinLength = 2;
   const [inputValue, setInputValue] = useState("");
   const onInputChange = (event) => {
     setInputValue(event.target.value);
@@ -8,7 +9,7 @@ export const AddCategory = ({ onNewCategory }) => {
   const onSubmit = (event) => {
     event.preventDefault();
     const trimmedInputValue = inputValue.trim();
-    if (trimmedInputValue.length < 3) return;
+    if (trimmedInputValue.length < inputMinLength) return;
     onNewCategory(trimmedInputValue);
     setInputValue("");
   };
@@ -17,7 +18,7 @@ export const AddCategory = ({ onNewCategory }) => {
     <form onSubmit={onSubmit}>
       <input
         type="text"
-        placeholder="Find Gifs"
+        placeholder={`Find Gifs (min. ${inputMinLength} chars)`}
         value={inputValue}
         onChange={onInputChange}
       />

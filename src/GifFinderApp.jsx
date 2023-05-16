@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { AddCategory } from "./components/AddCategory";
+import { GifGrid } from "./components/GifGrid";
 
 export const GifFinderApp = () => {
   const [categories, setCategories] = useState([]);
 
   const onAddCategory = (category) => {
-    setCategories([...new Set([...categories, category])]);
+    if (categories.includes(category)) return;
+    setCategories([category, ...categories]);
   };
 
   return (
@@ -14,13 +16,11 @@ export const GifFinderApp = () => {
 
       <AddCategory onNewCategory={onAddCategory} />
 
-      {/* <button onClick={onAddCategory}>Add</button> */}
-
-      <ol>
-        {categories.map((category) => (
-          <li key={category}>{category}</li>
-        ))}
-      </ol>
+      {categories.map((category) => (
+        <GifGrid key={category} category={category}>
+          {category}
+        </GifGrid>
+      ))}
     </>
   );
 };
