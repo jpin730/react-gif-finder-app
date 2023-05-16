@@ -11,6 +11,8 @@ export const GifGrid = ({ category }) => {
 
       <hr />
 
+      {isLoading && <h2>Loading...</h2>}
+
       <div className="card-grid">
         {images.map((image) => (
           <GifItem key={image.id} {...image} />
